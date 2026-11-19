@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Programas 29N, punto por punto</title>
+<meta name="description" content="Comparación neutral, tema a tema, de los programas electorales para las elecciones generales del 29 de noviembre de 2026.">
+<meta property="og:title" content="Programas 29N, punto por punto">
+<meta property="og:description" content="Qué propone cada partido, tema a tema. Con modo rápido y los programas para descargar.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111111'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-weight='700' font-size='13' fill='white' text-anchor='middle'%3E29N%3C/text%3E%3C/svg%3E">
+<script>
+  /* Aplica el tema guardado antes de pintar, para evitar un parpadeo */
+  try{ const t = JSON.parse(localStorage.getItem("tema")); if(t==="light"||t==="dark") document.documentElement.dataset.theme = t; }catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Estilo editorial: papel, tinta negra y un único resalto (amarillo rotulador) */
+:root{
+  --page:#FAF8F3; --surface:#FFFFFF; --ink:#111111; --muted:#5E5B55; --rule:#DDD8CE; --soft:#F0ECE3;
+  --hl:#FFD84D; --hl-ink:#111111; --mark:#FFE58A;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#161616; --surface:#1F1F1F; --ink:#F1EEE8; --muted:#A8A39A; --rule:#3A3833; --soft:#2A2825;
+    --hl:#E8C33A; --hl-ink:#111111; --mark:#6A5714;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#161616; --surface:#1F1F1F; --ink:#F1EEE8; --muted:#A8A39A; --rule:#3A3833; --soft:#2A2825;
+  --hl:#E8C33A; --hl-ink:#111111; --mark:#6A5714;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--page);color:var(--ink);
+  font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:1rem;line-height:1.55;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+h1,h2,.serif{font-family:"Source Serif 4",Georgia,"Times New Roman",serif}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wrap{max-width:84rem;margin:0 auto;padding:0 1.25rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Cabecera */
+header.site{padding:1.75rem 0 1.25rem;border-bottom:3px solid var(--ink)}
+.kicker{margin:0 0 .5rem;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.site h1{font-size:clamp(2rem,4.8vw,3.2rem);line-height:1.02;font-weight:700;letter-spacing:-0.015em;margin:0 0 .6rem}
+.site h1 a{text-decoration:none}
+.site p.lead{margin:0;max-width:62ch;color:var(--muted)}
+
+/* Barra de vistas, modo rápido y búsqueda */
+.bar{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--rule)}
+.views{display:flex;gap:1.25rem;flex-wrap:wrap}
+.views a{display:inline-block;padding:.35rem 0;text-decoration:none;font-weight:700;font-size:.98rem;border-bottom:3px solid transparent}
+.views a[aria-current="page"]{border-bottom-color:var(--hl)}
+.views a:not([aria-current="page"]):hover{border-bottom-color:var(--rule)}
+.tools{display:flex;gap:.75rem;align-items:center;flex:1 1 20rem;justify-content:flex-end;flex-wrap:wrap}
+.search{flex:1 1 14rem;max-width:24rem}
+.search input{width:100%;padding:.5rem .8rem;border:1px solid var(--ink);border-radius:4px;background:var(--surface)}
+.search input::placeholder{color:var(--muted)}
+.switch{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.92rem}
+.switch .knob{width:2.2rem;height:1.25rem;border-radius:999px;border:1.5px solid var(--ink);position:relative;background:var(--surface)}
+.switch .knob::after{content:"";position:absolute;top:.13rem;left:.15rem;width:.8rem;height:.8rem;border-radius:50%;background:var(--ink);transition:transform .15s}
+.switch[aria-checked="true"] .knob{background:var(--hl)}
+.switch[aria-checked="true"] .knob::after{transform:translateX(.92rem)}
+.switch:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.theme-btn{all:unset;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--muted);padding:.3rem .5rem;border:1px solid var(--rule);border-radius:4px}
+.theme-btn:hover{color:var(--ink);border-color:var(--ink)}
+.theme-btn:focus-visible{outline:3px solid var(--ink)}
+
+main{padding:1.75rem 0 4rem}
+h2.big{font-size:clamp(2rem,5.5vw,3.4rem);line-height:1;font-weight:700;letter-spacing:-0.02em;margin:0 0 1rem}
+h2.sec{font-size:1.45rem;font-weight:700;margin:2.25rem 0 .9rem}
+.meta{color:var(--muted);font-size:.92rem;margin:0 0 1rem}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1.2rem}
+.tip{border-left:4px solid var(--hl);padding:.2rem 0 .2rem .8rem;font-size:.92rem;margin:0 0 1.25rem;color:var(--muted)}
+.tip strong{color:var(--ink)}
+
+/* Botones y chips */
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.chip{cursor:pointer;padding:.35rem .75rem;border-radius:4px;border:1px solid var(--rule);background:var(--surface);font-size:.92rem;font-weight:500}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--page);font-weight:700}
+.link-btn{all:unset;cursor:pointer;font-size:.88rem;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:.25rem .2rem}
+.link-btn:hover{background:var(--mark)}
+.link-btn:focus-visible{outline:3px solid var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1rem;border-radius:4px;border:1.5px solid var(--ink);background:var(--ink);color:var(--page);font-weight:700;text-decoration:none;font-size:.95rem}
+.btn:hover{background:var(--surface);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--mark)}
+.btn svg{width:1.05em;height:1.05em}
+
+/* Inicio */
+details.method{margin-top:1rem;font-size:.9rem}
+details.method summary{cursor:pointer;font-weight:700}
+details.method p,details.method li{color:var(--muted)}
+
+.cards{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr))}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1rem 1.05rem;display:flex;flex-direction:column;gap:.6rem;text-decoration:none;transition:border-color .12s}
+.card:hover{border-color:var(--ink)}
+.card h3{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.3rem;font-weight:700;line-height:1.1}
+.card .sub{font-size:.8rem;color:var(--muted);line-height:1.35}
+.card ul{margin:0;padding-left:1.1rem;font-size:.88rem;display:grid;gap:.25rem}
+
+/* Barra izquierda-derecha */
+.lr{display:grid;gap:.25rem}
+.lr .track{position:relative;height:.4rem;border-radius:999px;background:var(--soft);border:1px solid var(--rule)}
+.lr .track::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--muted)}
+.lr .pin{position:absolute;top:50%;width:.95rem;height:.95rem;margin:-.475rem 0 0 -.475rem;border-radius:50%;background:var(--ink);border:2px solid var(--surface);z-index:1}
+.lr .ends{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.lr.big .track{height:.6rem}
+.lr.big .pin{width:1.35rem;height:1.35rem;margin:-.675rem 0 0 -.675rem;background:var(--hl);border:2px solid var(--ink)}
+.lr.big .ends{font-size:.82rem}
+
+/* Comparar */
+.layout{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media (min-width:62rem){.layout{grid-template-columns:14rem minmax(0,1fr)}}
+nav.rail{min-width:0}
+nav.rail ul{list-style:none;margin:0;padding:0 0 .4rem;display:flex;gap:.2rem;overflow-x:auto;scrollbar-width:thin}
+@media (max-width:61.99rem){
+  nav.rail{position:sticky;top:0;z-index:3;background:var(--page);margin:0 -1.25rem;padding:.5rem 1.25rem .1rem;border-bottom:1px solid var(--rule)}
+}
+@media (min-width:62rem){nav.rail ul{flex-direction:column;position:sticky;top:1rem}}
+nav.rail button{all:unset;cursor:pointer;display:block;white-space:nowrap;padding:.35rem .6rem;border-radius:3px;font-size:.95rem}
+@media (min-width:62rem){nav.rail button{white-space:normal}}
+nav.rail button:hover{background:var(--soft)}
+nav.rail button[aria-current="true"]{background:var(--hl);color:var(--hl-ink);font-weight:700}
+nav.rail button:focus-visible{outline:3px solid var(--ink);outline-offset:1px}
+
+.picker{margin:0 0 1.5rem;display:grid;gap:.6rem}
+.picker .row{display:flex;flex-wrap:wrap;gap:.3rem .7rem;align-items:center}
+.picker .label{font-size:.88rem;font-weight:700}
+
+.slips{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
+/* Columnas según cuántos partidos haya: 1 → 100 %, 2 → 50 %, 3 o más → 33 % (y siguen en otra fila) */
+@media (min-width:40rem){.slips{grid-template-columns:repeat(min(var(--n,3),2),minmax(0,1fr))}}
+@media (min-width:62rem){.slips{grid-template-columns:repeat(min(var(--n,3),3),minmax(0,1fr))}}
+.slip{background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--ink);border-radius:0 0 6px 6px;padding:.95rem 1.1rem 1.1rem;min-width:0}
+.slip header{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding-bottom:.55rem;margin-bottom:.75rem;border-bottom:1px solid var(--rule)}
+.slip h3{margin:0;font-family:"Source Serif 4",Georgia,serif;font-size:1.35rem;line-height:1.1;font-weight:700}
+.slip h3 a{text-decoration:none}
+.slip h3 a:hover{text-decoration:underline;text-underline-offset:3px}
+.slip .kind{font-size:.72rem;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.06em}
+.breve{font-size:1.02rem;line-height:1.5;margin:0}
+ul.measures{margin:0;padding:0 0 0 1.05rem;display:flex;flex-direction:column;gap:.55rem}
+ul.measures li{font-size:.94rem;line-height:1.5}
+ul.measures li::marker{color:var(--muted)}
+.note{color:var(--muted);font-style:italic;font-size:.92rem;margin:0;list-style:none}
+ul.measures .note{margin-left:-1.05rem}
+details.more{margin-top:.8rem;padding-top:.6rem;border-top:1px dashed var(--rule)}
+details.more summary{cursor:pointer;font-size:.88rem;font-weight:700}
+details.more ul.measures{margin-top:.6rem}
+mark{background:var(--mark);color:inherit;padding:0 .1em}
+.result-group{margin:0 0 2.5rem}
+.result-group h3.t{font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem;font-weight:700;margin:0 0 .9rem}
+.result-group h3.t button{all:unset;cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.empty-state{padding:2rem 1rem;border:1px dashed var(--muted);border-radius:6px;color:var(--muted);text-align:center}
+
+/* Partido */
+.party-head{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-bottom:1.75rem}
+@media (min-width:62rem){.party-head{grid-template-columns:minmax(0,1fr) 26rem;align-items:start}}
+.party-sel{display:flex;gap:.6rem;align-items:center;margin:0 0 1.25rem}
+.party-sel select{padding:.45rem 2rem .45rem .7rem;border:1px solid var(--ink);border-radius:4px;background:var(--surface);font-weight:700;max-width:100%}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;margin:1.25rem 0 0;font-size:.9rem}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0}
+.resumen{font-size:1.08rem;max-width:62ch;margin:0 0 1.25rem}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.esencial{margin:1.5rem 0 0;padding:1rem 1.15rem;border:1px solid var(--rule);border-left:5px solid var(--hl);background:var(--surface);border-radius:0 6px 6px 0}
+.esencial h3{margin:0 0 .6rem;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.esencial ol{margin:0;padding-left:1.3rem;display:grid;gap:.4rem}
+.esencial li::marker{font-weight:700}
+.toc{position:sticky;top:0;z-index:3;background:var(--page);border-bottom:1px solid var(--rule);margin:0 -1.25rem 1rem;padding:.5rem 1.25rem}
+.toc ul{list-style:none;margin:0;padding:0 0 .3rem;display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:thin}
+.toc button{all:unset;cursor:pointer;white-space:nowrap;padding:.25rem .6rem;border:1px solid var(--rule);border-radius:3px;font-size:.85rem;background:var(--surface)}
+.toc button:hover{border-color:var(--ink)}
+.ptopic{padding:1.2rem 0;border-top:1px solid var(--rule);scroll-margin-top:4.5rem}
+.ptopic h3{margin:0 0 .7rem;font-family:"Source Serif 4",Georgia,serif;font-size:1.45rem;font-weight:700}
+.ptopic h4{margin:1rem 0 .5rem;font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.ptopic ul.measures,.ptopic .breve{max-width:75ch}
+table.ev{border-collapse:collapse;width:100%;font-size:.84rem;margin-top:.6rem}
+table.ev th,table.ev td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--rule);vertical-align:top}
+table.ev td.n{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+.ev-wrap{overflow-x:auto}
+.empty{color:var(--muted);font-style:italic}
+
+footer.site{border-top:3px solid var(--ink);padding:1.25rem 0 3rem;color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <p class="kicker">Elecciones generales · 29 de noviembre de 2026</p>
+    <h1><a href="#inicio">Programas 29N, punto por punto</a></h1>
+    <p class="lead">Qué propone cada partido, según su propio programa.</p>
+  </header>
+
+  <div class="bar">
+    <nav class="views" aria-label="Vistas">
+      <a href="#inicio" data-view="inicio">Partidos</a>
+      <a href="#tema-vivienda" data-view="tema">Comparar</a>
+      <a href="#partido-psoe" data-view="partido">Por partido</a>
+    </nav>
+    <div class="tools">
+      <button type="button" class="theme-btn" id="tema" aria-label="Cambiar tema"></button>
+      <button type="button" class="switch" role="switch" id="rapido" aria-checked="false"><span class="knob" aria-hidden="true"></span>Modo rápido</button>
+      <div class="search" role="search">
+        <label for="q" class="sr">Buscar en todos los programas</label>
+        <input id="q" type="search" placeholder="Buscar: nuclear, alquiler, OTAN…" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <main id="app"></main>
+
+  <footer class="site">
+    Resumen del 19 de noviembre de 2026 a partir de los programas oficiales. Para el detalle, descarga el programa completo.
+  </footer>
+</div>
+
+<script src="datos.js"></script>
+<script>
+/* ---------- Posición ideológica (se calcula a partir de PARTIDOS[i].ejes) ---------- */
+const ECO = ["E1","E2","E3","E4","E5","E6","E7","E8"];
+const SOC = ["S1","S2","S3","S4","S5","S6","S7","S8"];
+const MIN_INDICADORES = 3;   // con menos, la posición se marca como poco fiable
+
+function axis(p, keys){
+  const vals = keys.map(k=>p.ejes[k]).filter(Boolean).map(x=>x.p);
+  if(!vals.length) return {v:null, n:0};
+  return {v: vals.reduce((a,b)=>a+b,0)/vals.length*5, n: vals.length};   // -2..2 → -10..10
+}
+for(const p of PARTIDOS){
+  p.eco = axis(p, ECO);
+  p.soc = axis(p, SOC);
+  const both = [p.eco.v, p.soc.v].filter(v=>v!==null);
+  p.lr = both.length ? both.reduce((a,b)=>a+b,0)/both.length : null;
+  p.weak = p.eco.n < MIN_INDICADORES || p.soc.n < MIN_INDICADORES;
+}
+
+/* ---------- Utilidades ---------- */
+const app = document.getElementById("app");
+const qInput = document.getElementById("q");
+const rapidoBtn = document.getElementById("rapido");
+const temaBtn = document.getElementById("tema");
+const byId = Object.fromEntries(PARTIDOS.map(p=>[p.id,p]));
+const temaById = Object.fromEntries(TEMAS.map(t=>[t.id,t]));
+const SVGNS = "http://www.w3.org/2000/svg";
+
+function el(tag, attrs, ...kids){
+  const n = document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs||{})){
+    if(k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if(v!==null && v!==undefined && v!==false) n.setAttribute(k, v);
+  }
+  for(const c of kids.flat()) if(c!==null && c!==undefined && c!==false) n.append(c);
+  return n;
+}
+function svg(tag, attrs, ...kids){
+  const n = document.createElementNS(SVGNS, tag);
+  for(const [k,v] of Object.entries(attrs||{})) n.setAttribute(k, v);
+  for(const c of kids.flat()) if(c!==null && c!==undefined) n.append(c);
+  return n;
+}
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const textOf = it => typeof it==="string" ? it : it.n;
+const matches = (it,q) => norm(textOf(it)).includes(norm(q));
+function highlight(text, q){
+  if(!q) return text;
+  const frag = document.createDocumentFragment(), nt = norm(text), nq = norm(q);
+  let i = 0, j;
+  while((j = nt.indexOf(nq, i)) !== -1){
+    frag.append(text.slice(i,j), el("mark",{}, text.slice(j,j+nq.length)));
+    i = j+nq.length;
+  }
+  frag.append(text.slice(i));
+  return frag;
+}
+function measures(items, q){
+  if(!items || !items.length) return el("p",{class:"note"},"El programa no trata este tema.");
+  return el("ul",{class:"measures"}, items.map(it =>
+    typeof it==="string" ? el("li",{}, highlight(it,q)) : el("li",{class:"note"}, highlight(it.n,q))));
+}
+const tema = (p, id) => p.temas[id] || {clave:[], mas:[], breve:""};
+const go = hash => { qInput.value=""; state.q=""; location.hash = hash; };
+const fmt = v => (v>0?"+":v<0?"−":"")+Math.abs(v).toFixed(1).replace(".",",");
+const ICON_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg>';
+
+/* ---------- Estado (selección y modo rápido se recuerdan en este navegador) ---------- */
+function load(key, fallback){
+  try{ const v = JSON.parse(localStorage.getItem(key)); return v===null ? fallback : v; }catch(e){ return fallback; }
+}
+function save(key, v){ try{ localStorage.setItem(key, JSON.stringify(v)); }catch(e){} }
+const state = {
+  view:"inicio", topic:TEMAS[0].id, party:PARTIDOS[0].id, q:"",
+  visible: load("seleccion", []).filter(id=>byId[id]),
+  rapido: load("rapido", false) === true,
+};
+
+/* ---------- Barra izquierda-derecha ---------- */
+function lrBar(p, big){
+  if(p.lr===null) return el("p",{class:"meta"},"Sin datos suficientes para situarlo.");
+  const pct = (p.lr+10)/20*100;
+  return el("div",{class:"lr"+(big?" big":""), role:"img",
+      "aria-label":`${p.name}: ${fmt(p.lr)} en una escala de −10 (izquierda) a +10 (derecha)`},
+    el("div",{class:"track"}, el("span",{class:"pin", style:`left:${pct}%`})),
+    el("div",{class:"ends","aria-hidden":"true"}, el("span",{},"Izquierda"), el("span",{},"Centro"), el("span",{},"Derecha")));
+}
+
+function methodNote(){
+  return el("details",{class:"method"},
+    el("summary",{},"Cómo se calcula la barra"),
+    el("ul",{},
+      el("li",{},"16 indicadores puntuados de −2 a +2 según lo que propone cada programa."),
+      el("li",{},"Económicos: impuestos, vivienda, trabajo, empresas públicas, servicios públicos, gasto, precios y pensiones."),
+      el("li",{},"Sociales: inmigración, aborto, LGTBI, seguridad, libertad de expresión, violencia de género, religión y memoria histórica."),
+      el("li",{},"La barra es la media de todos. Es orientativa, no oficial.")));
+}
+
+/* ---------- Vista: inicio ---------- */
+function partyCard(p){
+  return el("a",{class:"card", href:"#partido-"+p.id},
+    el("h3",{}, p.name),
+    el("span",{class:"sub"}, p.ambito==="Estatal" ? (p.nombre!==p.name ? p.nombre : p.doc) : p.ambito),
+    state.rapido && p.esencial ? el("ul",{}, p.esencial.slice(0,3).map(s=>el("li",{}, s))) : null,
+    lrBar(p),
+    p.weak ? el("span",{class:"sub"},"Posición poco fiable: pocos datos.") : null);
+}
+function viewHome(){
+  app.replaceChildren(
+    state.rapido ? null : el("p",{class:"tip"}, el("strong",{},"Consejo: "), "activa el modo rápido para ver solo lo esencial."),
+    el("p",{class:"meta"},"Toca un partido para ver todo lo que propone."),
+    methodNote(),
+    el("h2",{class:"sec"},"Partidos de ámbito estatal"),
+    el("div",{class:"cards"}, PARTIDOS.filter(p=>p.ambito==="Estatal").map(partyCard)),
+    el("h2",{class:"sec"},"Partidos de ámbito autonómico"),
+    el("div",{class:"cards"}, PARTIDOS.filter(p=>p.ambito!=="Estatal").map(partyCard)));
+}
+
+/* ---------- Vista: comparar por tema ---------- */
+function rail(){
+  return el("nav",{class:"rail","aria-label":"Temas"}, el("ul",{}, TEMAS.map(t =>
+    el("li",{}, el("button",{type:"button","aria-current":String(t.id===state.topic && !state.q),
+      onclick:()=>{ go("tema-"+t.id); if(window.scrollY > app.offsetTop) app.scrollIntoView(); }}, t.name)))));
+}
+function picker(){
+  const setVisible = ids => { state.visible = ids; save("seleccion", ids); render(); };
+  const chips = PARTIDOS.map(p => el("button",{type:"button", class:"chip", "aria-pressed":String(state.visible.includes(p.id)),
+    onclick:()=> setVisible(state.visible.includes(p.id) ? state.visible.filter(x=>x!==p.id) : [...state.visible, p.id])}, p.name));
+  const quick = [
+    ["Todos", ()=>setVisible(PARTIDOS.map(p=>p.id))],
+    ["Solo estatales", ()=>setVisible(PARTIDOS.filter(p=>p.ambito==="Estatal").map(p=>p.id))],
+    state.visible.length ? ["Quitar todos", ()=>setVisible([])] : null].filter(Boolean);
+  return el("div",{class:"picker"},
+    el("div",{class:"row"}, el("span",{class:"label"},"Partidos:"), quick.map(([t,f])=>el("button",{type:"button",class:"link-btn",onclick:f},t))),
+    el("div",{class:"chips"}, chips));
+}
+function slip(id, topicId, items, more, q){
+  const p = byId[id];
+  const attrs = {class:"slip"};
+  const breve = !q && state.rapido ? tema(p, topicId).breve : null;
+  return el("article", attrs,
+    el("header",{}, el("h3",{}, el("a",{href:"#partido-"+id}, p.name)), el("span",{class:"kind"}, p.ambito==="Estatal" ? "Estatal" : p.ambito)),
+    breve ? [el("p",{class:"breve"}, breve),
+             el("details",{class:"more"}, el("summary",{},"Ver las medidas"), measures([...(items||[]), ...(more||[])], ""))]
+          : [measures(items, q),
+             more && more.length ? el("details",{class:"more"}, el("summary",{}, `${more.length} medidas más`), measures(more, q)) : null]);
+}
+function viewCompare(){
+  const main = el("div",{});
+  const shown = PARTIDOS.map(p=>p.id).filter(id=>state.visible.includes(id));
+  if(state.q){
+    const searched = shown.length ? shown : PARTIDOS.map(p=>p.id);
+    main.append(el("h2",{class:"big"},"Resultados"),
+      el("p",{class:"meta"},"Medidas con «"+state.q+"»."), picker());
+    let any = false;
+    for(const t of TEMAS){
+      const grid = el("div",{class:"slips"});
+      for(const id of searched){
+        const all = [...(tema(byId[id],t.id).clave||[]), ...(tema(byId[id],t.id).mas||[])].filter(it=>typeof it==="string" && matches(it,state.q));
+        if(all.length) grid.append(slip(id, t.id, all, null, state.q));
+      }
+      if(!grid.children.length) continue;
+      any = true;
+      main.append(el("section",{class:"result-group"},
+        el("h3",{class:"t"}, el("button",{type:"button",onclick:()=>go("tema-"+t.id)}, t.name)), grid));
+    }
+    if(!any) main.append(el("p",{class:"empty"},"Sin resultados. Prueba con la raíz de la palabra (p. ej., «alquil»)."));
+  } else {
+    const t = temaById[state.topic];
+    main.append(el("h2",{class:"big"}, t.name), picker());
+    if(!shown.length) main.append(el("div",{class:"empty-state"},
+      "Elige uno o varios partidos."));
+    else main.append(el("p",{class:"meta"}, `${shown.length} ${shown.length===1?"partido":"partidos"}`));
+    main.append(el("div",{class:"slips", style:`--n:${shown.length}`}, shown.map(id => slip(id, t.id, tema(byId[id],t.id).clave, tema(byId[id],t.id).mas, ""))));
+  }
+  app.replaceChildren(el("div",{class:"layout"}, rail(), main));
+  const ul = app.querySelector("nav.rail ul"), cur = app.querySelector('nav.rail button[aria-current="true"]');
+  if(ul && cur && ul.scrollWidth > ul.clientWidth) ul.scrollLeft = cur.offsetLeft - (ul.clientWidth - cur.offsetWidth)/2;
+}
+
+/* ---------- Vista: partido ---------- */
+const NOMBRE_IND = {E1:"Impuestos",E2:"Vivienda",E3:"Trabajo",E4:"Empresas públicas",E5:"Servicios públicos",E6:"Gasto y déficit",E7:"Intervención de precios",E8:"Pensiones",
+  S1:"Inmigración",S2:"Aborto y eutanasia",S3:"Derechos LGTBI",S4:"Seguridad",S5:"Libertad de expresión",S6:"Violencia de género",S7:"Religión y tradición",S8:"Memoria histórica"};
+function evidence(p){
+  const rows = [...ECO,...SOC].filter(k=>p.ejes[k]).map(k =>
+    el("tr",{}, el("td",{}, NOMBRE_IND[k]), el("td",{class:"n"}, fmt(p.ejes[k].p).replace(",0","")), el("td",{}, p.ejes[k].e)));
+  return el("details",{class:"method"},
+    el("summary",{},"Por qué aparece aquí"),
+    el("p",{}, "Negativo = izquierda; positivo = derecha."),
+    el("div",{class:"ev-wrap"}, el("table",{class:"ev"},
+      el("thead",{}, el("tr",{}, el("th",{},"Indicador"), el("th",{},"Valor"), el("th",{},"Qué dice el programa"))),
+      el("tbody",{}, rows))));
+}
+function viewParty(){
+  const p = byId[state.party];
+  const sel = el("select",{id:"psel", onchange:e=>go("partido-"+e.target.value)},
+    PARTIDOS.map(x=>el("option",{value:x.id, selected:x.id===p.id ? "" : null}, x.name)));
+  const dl = el("a",{class:"btn", href:p.pdf, download:"", type:"application/pdf"}); dl.innerHTML = ICON_DL; dl.append(` Descargar programa (PDF, ${p.pdfMB})`);
+  const compare = el("a",{class:"btn ghost", href:"#tema-"+state.topic,
+    onclick:()=>{ if(!state.visible.includes(p.id)){ state.visible=[...state.visible, p.id]; save("seleccion", state.visible); } }},"Comparar con otros");
+  const toc = el("nav",{class:"toc","aria-label":"Temas del programa"}, el("ul",{}, TEMAS.map(t =>
+    el("li",{}, el("button",{type:"button", onclick:()=>document.getElementById("t-"+t.id).scrollIntoView({behavior:"smooth"})}, t.name)))));
+  const sections = TEMAS.map(t => {
+    const {clave, mas, breve} = tema(p, t.id);
+    const attrs = {class:"ptopic", id:"t-"+t.id};
+    const head = el("h3",{}, t.name);
+    if(state.rapido && breve) return el("section", attrs, head, el("p",{class:"breve"}, breve),
+      el("details",{class:"more"}, el("summary",{},"Ver todas las medidas"), measures([...(clave||[]), ...(mas||[])], "")));
+    return el("section", attrs, head, measures(clave, ""),
+      mas && mas.length ? [el("h4",{},"Otras medidas"), measures(mas, "")] : null);
+  });
+  app.replaceChildren(
+    el("div",{class:"party-sel"}, el("label",{for:"psel", class:"meta", style:"margin:0"},"Partido"), sel),
+    el("div",{class:"party-head"},
+      el("div",{},
+        el("h2",{class:"big"}, p.name),
+        p.nombre!==p.name ? el("p",{class:"meta"}, p.nombre) : null,
+        state.rapido ? null : el("p",{class:"resumen"}, p.resumen),
+        el("div",{class:"actions"}, dl, compare),
+        p.esencial ? el("div",{class:"esencial"}, el("h3",{},"Lo esencial"), el("ol",{}, p.esencial.map(s=>el("li",{}, s)))) : null,
+        el("dl",{class:"facts"},
+          el("dt",{},"Documento"), el("dd",{}, p.doc),
+          el("dt",{},"Tipo"), el("dd",{}, p.tipo),
+          el("dt",{},"Ámbito"), el("dd",{}, p.ambito),
+          el("dt",{},"Extensión"), el("dd",{}, p.ext + (p.idioma && p.idioma!=="Castellano" ? ` · en ${p.idioma.toLowerCase()}` : "")),
+          el("dt",{},"Estructura"), el("dd",{}, p.estructura.join(" · ")))),
+      el("aside",{class:"panel"},
+        el("h3",{style:"margin:0 0 .7rem;font-size:1.05rem"},"Posición estimada"),
+        lrBar(p, true),
+        el("dl",{class:"facts"},
+          el("dt",{},"Eje económico"), el("dd",{}, p.eco.v===null ? "sin datos" : `${fmt(p.eco.v)} (${p.eco.n} indicadores)`),
+          el("dt",{},"Eje social"), el("dd",{}, p.soc.v===null ? "sin datos" : `${fmt(p.soc.v)} (${p.soc.n} indicadores)`)),
+        p.weak ? el("p",{class:"meta", style:"margin-top:.6rem"},"Pocos datos: posición poco fiable.") : null,
+        evidence(p))),
+    toc, ...sections);
+}
+
+/* ---------- Navegación ---------- */
+function setActiveView(){
+  for(const a of document.querySelectorAll(".views a")){
+    const v = state.q ? "tema" : state.view;
+    a.setAttribute("aria-current", a.dataset.view===v ? "page" : "false");
+  }
+  document.querySelector('.views a[data-view="tema"]').setAttribute("href","#tema-"+state.topic);
+  document.querySelector('.views a[data-view="partido"]').setAttribute("href","#partido-"+state.party);
+  rapidoBtn.setAttribute("aria-checked", String(state.rapido));
+}
+function render(){
+  setActiveView();
+  if(state.q) viewCompare();
+  else if(state.view==="partido") viewParty();
+  else if(state.view==="tema") viewCompare();
+  else viewHome();
+}
+function fromHash(){
+  const h = decodeURIComponent((location.hash||"").slice(1));
+  const prev = state.view + state.party;
+  if(h.startsWith("tema-") && temaById[h.slice(5)]){ state.view="tema"; state.topic=h.slice(5); }
+  else if(h.startsWith("partido-") && byId[h.slice(8)]){ state.view="partido"; state.party=h.slice(8); }
+  else state.view="inicio";
+  render();
+  if(state.view==="partido" && prev !== state.view + state.party) window.scrollTo(0,0);
+}
+let tId;
+qInput.addEventListener("input", ()=>{
+  clearTimeout(tId);
+  tId = setTimeout(()=>{ state.q = qInput.value.trim(); render(); }, 150);
+});
+rapidoBtn.addEventListener("click", ()=>{ state.rapido = !state.rapido; save("rapido", state.rapido); render(); });
+
+/* Tema: automático (según el sistema) → claro → oscuro */
+const TEMAS_UI = [["auto","Tema: automático"],["light","Tema: claro"],["dark","Tema: oscuro"]];
+function paintTema(){
+  const t = document.documentElement.dataset.theme || "auto";
+  temaBtn.textContent = TEMAS_UI.find(x=>x[0]===t)[1];
+}
+temaBtn.addEventListener("click", ()=>{
+  const cur = document.documentElement.dataset.theme || "auto";
+  const next = TEMAS_UI[(TEMAS_UI.findIndex(x=>x[0]===cur)+1) % TEMAS_UI.length][0];
+  if(next==="auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = next;
+  save("tema", next); paintTema();
+});
+paintTema();
+window.addEventListener("hashchange", fromHash);
+fromHash();
+</script>
+</body>
+</html>
